@@ -29,6 +29,11 @@ module ActiveRecord
   module ConnectionAdapters
     class Mysql2RgeoAdapter < Mysql2Adapter
       include Mysql2Rgeo::SchemaStatements
+      
+      # add constants missing in Rails 5 but in Rails 4.2 active record
+      # temp solution
+      INDEX_TYPES  = [:fulltext, :spatial]
+      INDEX_USINGS = [:btree, :hash]
 
       SPATIAL_COLUMN_OPTIONS =
         {
