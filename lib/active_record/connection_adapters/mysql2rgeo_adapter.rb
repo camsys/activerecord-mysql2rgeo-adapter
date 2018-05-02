@@ -98,7 +98,7 @@ module ActiveRecord
 
         #    indexes.last.columns << row[:Column_name]
         #    indexes.last.lengths.merge!(row[:Column_name] => row[:Sub_part].to_i) if row[:Sub_part] && mysql_index_type != :spatial
-        #  end
+          end
         end
 
         indexes
