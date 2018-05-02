@@ -94,17 +94,16 @@ module ActiveRecord
               index_type = INDEX_TYPES.include?(mysql_index_type) ? mysql_index_type : nil
               index_using = INDEX_USINGS.include?(mysql_index_type) ? mysql_index_type : nil
               indexes << IndexDefinition.new(
-                row[:Table], 
-                row[:Key_name], 
-                row[:Non_unique].to_i == 0, 
-                [],
-                {},
-                {},
-                {},
-                nil,
-                index_type, 
-                index_using, 
-                row[:Index_comment].presence)
+                  row[:Table],
+                  row[:Key_name],
+                  row[:Non_unique].to_i == 0,
+                  [],
+                  lengths: {},
+                  orders: {},
+                  type: index_type,
+                  using: index_using,
+                  comment: row[:Index_comment].presence
+              )
             end
 
             indexes.last.columns << row[:Column_name]
