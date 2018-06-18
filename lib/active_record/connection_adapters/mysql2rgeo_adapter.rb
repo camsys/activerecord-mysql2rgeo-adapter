@@ -115,6 +115,9 @@ module ActiveRecord
       end
 
       def quote(value)
+        if value.respond_to?(:value_for_database)
+          value = value.value_for_database
+        end
         if RGeo::Feature::Geometry.check_type(value)
           "ST_GeomFromWKB(0x#{RGeo::WKRep::WKBGenerator.new(hex_format: true, little_endian: true).generate(value)},#{value.srid})"
         else
